@@ -1,1 +1,452 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#142638">
+
+  <title>Números naturales | UCMI</title>
+
+  <style>
+    :root {
+      --azul: #142638;
+      --azul-claro: #203c53;
+      --naranja: #F79300;
+      --rojo: #ED480D;
+      --amarillo: #FFE600;
+      --blanco: #FFFFFF;
+      --fondo: #F4F6FA;
+      --texto: #263445;
+      --texto-suave: #64748B;
+      --borde: #E1E7EF;
+      --radio: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .encabezado {
+      background:
+        radial-gradient(
+          circle at 90% 15%,
+          rgba(247, 147, 0, 0.16),
+          transparent 25%
+        ),
+        linear-gradient(135deg, var(--azul), #1B3349);
+      color: var(--blanco);
+    }
+
+    .barra {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px 26px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .marca {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .simbolo {
+      width: 42px;
+      height: 42px;
+      border: 3px solid var(--naranja);
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .simbolo::before,
+    .simbolo::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border: 3px solid;
+      border-radius: 50%;
+      top: 10px;
+    }
+
+    .simbolo::before {
+      border-color: var(--rojo);
+      left: -8px;
+    }
+
+    .simbolo::after {
+      border-color: var(--amarillo);
+      right: -8px;
+    }
+
+    .marca-nombre {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .marca-descripcion {
+      display: block;
+      color: #D1DCE7;
+      font-size: 0.72rem;
+    }
+
+    .volver {
+      color: var(--blanco);
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      padding: 9px 14px;
+    }
+
+    .volver:hover {
+      border-color: var(--naranja);
+      color: var(--amarillo);
+    }
+
+    .presentacion {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 26px 76px;
+    }
+
+    .sobrelinea {
+      color: var(--amarillo);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 800px;
+      margin: 14px 0;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      line-height: 1.12;
+      letter-spacing: -1.5px;
+    }
+
+    h1 span {
+      color: var(--naranja);
+    }
+
+    .introduccion {
+      max-width: 720px;
+      color: #D5DFEB;
+      font-size: 1.08rem;
+    }
+
+    .acento {
+      display: flex;
+      gap: 7px;
+      margin-top: 28px;
+    }
+
+    .acento span {
+      width: 34px;
+      height: 5px;
+      border-radius: 5px;
+    }
+
+    .acento span:nth-child(1) {
+      background: var(--naranja);
+    }
+
+    .acento span:nth-child(2) {
+      background: var(--rojo);
+    }
+
+    .acento span:nth-child(3) {
+      background: var(--amarillo);
+    }
+
+    main {
+      max-width: 950px;
+      margin: -28px auto 0;
+      padding: 0 24px 60px;
+      position: relative;
+    }
+
+    .contenido-card {
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      padding: clamp(22px, 5vw, 38px);
+      margin-bottom: 22px;
+      box-shadow: 0 8px 28px rgba(20, 38, 56, 0.06);
+    }
+
+    .etiqueta-seccion {
+      color: #A85E00;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      color: var(--azul);
+      margin: 8px 0 14px;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      line-height: 1.3;
+    }
+
+    h3 {
+      color: var(--azul);
+      margin-top: 26px;
+    }
+
+    .texto-suave {
+      color: var(--texto-suave);
+    }
+
+    .proposito {
+      border-left: 4px solid var(--naranja);
+      background: #FFF9EF;
+      border-radius: 0 12px 12px 0;
+      padding: 18px 20px;
+      margin-top: 24px;
+    }
+
+    .proposito strong {
+      color: var(--azul);
+    }
+
+    .lista-problemas {
+      padding-left: 24px;
+    }
+
+    .lista-problemas li {
+      padding: 8px 0;
+    }
+
+    .lista-problemas li::marker {
+      color: var(--naranja);
+      font-weight: 800;
+    }
+
+    .pendiente {
+      border: 1px dashed #D5A34C;
+      background: #FFFCF5;
+      border-radius: 12px;
+      padding: 18px;
+      color: #68552F;
+    }
+
+    .navegacion-inferior {
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 28px;
+    }
+
+    .boton-volver {
+      display: inline-block;
+      background: var(--azul);
+      color: var(--blanco);
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .boton-volver:hover {
+      background: var(--azul-claro);
+      box-shadow: 0 0 0 3px rgba(247, 147, 0, 0.22);
+    }
+
+    .pie {
+      background: var(--azul);
+      color: #D5DFEB;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.85rem;
+    }
+
+    .pie strong {
+      color: var(--blanco);
+      letter-spacing: 2px;
+    }
+
+    .pie-acento {
+      color: var(--naranja);
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--naranja);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .barra {
+        padding: 18px;
+      }
+
+      .marca-descripcion {
+        max-width: 190px;
+        line-height: 1.4;
+      }
+
+      .volver {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+      }
+
+      .presentacion {
+        padding: 46px 20px 58px;
+      }
+
+      main {
+        padding: 0 14px 40px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="encabezado">
+    <nav class="barra" aria-label="Navegación principal">
+      <a class="marca" href="../../temario.html"
+         aria-label="Regresar al temario de UCMI">
+        <span class="simbolo" aria-hidden="true"></span>
+        <span>
+          <span class="marca-nombre">UCMI</span>
+          <span class="marca-descripcion">
+            Universitario de Ciencias, Matemáticas e Idiomas
+          </span>
+        </span>
+      </a>
+
+      <a class="volver" href="../../temario.html">
+        ← Volver al temario
+      </a>
+    </nav>
+
+    <div class="presentacion">
+      <span class="sobrelinea">Álgebra y Funciones · Tema 1.1</span>
+
+      <h1>Números <span>naturales</span></h1>
+
+      <p class="introduccion">
+        Comenzaremos a construir nuestra comprensión de los números
+        naturales a partir de situaciones que nos permitan reconocer
+        la necesidad de contar, ordenar y operar.
+      </p>
+
+      <div class="acento" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="contenido-card">
+      <span class="etiqueta-seccion">01 · Punto de partida</span>
+      <h2>Necesidades sentidas</h2>
+
+      <p class="texto-suave">
+        Antes de presentar definiciones y propiedades, examinaremos
+        situaciones que nos permitan descubrir qué ideas matemáticas
+        necesitamos construir.
+      </p>
+
+      <div class="proposito">
+        <strong>Propósito de aprendizaje</strong>
+        <p>
+          Reconocer situaciones en las que necesitamos contar,
+          comparar cantidades, establecer un orden y comunicar
+          resultados con precisión.
+        </p>
+      </div>
+
+      <h3>Problemas iniciales</h3>
+
+      <div class="pendiente">
+        Los problemas de esta sección se incorporarán y validarán
+        antes de desarrollar la teoría matemática.
+      </div>
+    </section>
+
+    <section class="contenido-card">
+      <span class="etiqueta-seccion">02 · Construcción matemática</span>
+      <h2>Desarrollo del tema</h2>
+
+      <p class="texto-suave">
+        En esta sección construiremos progresivamente los conceptos,
+        las propiedades y los procedimientos relacionados con los
+        números naturales.
+      </p>
+
+      <div class="pendiente">
+        Contenido pendiente de desarrollo y validación mediante AGEM.
+      </div>
+    </section>
+
+    <section class="contenido-card">
+      <span class="etiqueta-seccion">03 · Aplicación</span>
+      <h2>Resolución de problemas</h2>
+
+      <p class="texto-suave">
+        Aplicaremos las ideas construidas para resolver problemas
+        y comprobar que podemos utilizarlas en situaciones nuevas.
+      </p>
+
+      <div class="pendiente">
+        Los ejercicios se incorporarán cuando definamos y validemos
+        el contenido matemático del tema.
+      </div>
+    </section>
+
+    <nav class="navegacion-inferior" aria-label="Navegación del tema">
+      <a class="boton-volver" href="../../temario.html">
+        ← Regresar al temario
+      </a>
+    </nav>
+
+  </main>
+
+  <footer class="pie">
+    <strong>UCMI</strong>
+    <span class="pie-acento"> · </span>
+    Universitario de Ciencias, Matemáticas e Idiomas
+    <br>
+    <span>Plataforma educativa de Matemáticas</span>
+  </footer>
+
+</body>
+</html>
+
